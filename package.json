@@ -1,0 +1,138 @@
+{
+	"name": "clipboard",
+	"displayName": "clipboard",
+	"description": "clipboard like intellij",
+	"version": "1.0.0",
+	"engines": {
+		"vscode": "^1.48.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:clipboard.copy",
+		"onCommand:clipboard.cut",
+		"onCommand:clipboard.pasteFromClipboard",
+		"onView:clipboard.history"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "clipboard-history",
+					"title": "Clipboard History",
+					"icon": "resources/clipboard-outline.png"
+				}
+			]
+		},
+		"views": {
+			"clipboard-history": [
+				{
+					"id": "clipboard.history",
+					"name": "Clipboard History"
+				},
+				{
+					"id": "clipboard.selected",
+					"name": "Clipboard Selected"
+				}
+			]
+		},
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "clipboard.history.remove",
+					"when": "false"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "clipboard.history.copy",
+					"when": "viewItem =~ /^clipHistoryItem:/",
+					"group": "inline"
+				},
+				{
+					"command": "clipboard.history.remove",
+					"when": "viewItem =~ /^clipHistoryItem:/",
+					"group": "inline"
+				},
+				{
+					"command": "clipboard.history.remove",
+					"when": "viewItem =~ /^clipHistoryItem:/",
+					"group": "1_modification"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "clipboard.copy",
+				"title": "copy lsh.clipboard"
+			},
+			{
+				"command": "clipboard.cut",
+				"title": "cut lsh.clipboard"
+			},
+			{
+				"command": "clipboard.paste",
+				"title": "paste lsh.clipboard"
+			},
+			{
+				"command": "clipboard.history.copy",
+				"title": "Copy",
+				"icon": {
+					"dark": "resources/dark/copy.png",
+					"light": "resources/light/copy.png"
+				}
+			},
+			{
+				"command": "clipboard.history.remove",
+				"title": "Remove",
+				"icon": {
+					"dark": "resources/dark/remove.svg",
+					"light": "resources/light/remove.svg"
+				}
+			}
+		],
+		"keybindings": [
+			{
+				"command": "clipboard.copy",
+				"key": "ctrl+c",
+				"mac": "cmd+c",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "clipboard.cut",
+				"key": "ctrl+x",
+				"mac": "cmd+x",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "clipboard.pasteFromClipboard",
+				"key": "ctrl+shift+v",
+				"mac": "cmd+shift+v",
+				"when": "editorTextFocus"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.48.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^14.0.27",
+		"eslint": "^7.6.0",
+		"@typescript-eslint/eslint-plugin": "^3.8.0",
+		"@typescript-eslint/parser": "^3.8.0",
+		"glob": "^7.1.6",
+		"mocha": "^8.0.1",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.4.0"
+	}
+}
