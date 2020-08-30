@@ -2,18 +2,12 @@ import * as vscode from 'vscode';
 import { commands, ExtensionContext, TreeItem, TreeItemCollapsibleState, window } from 'vscode';
 
 var clipboardList: Clipboard[] = [];
-var selectedItem: TreeItem;
 
 export async function activate(context: ExtensionContext) {
 	async function addClipboardItem() {
 		let copied = await vscode.env.clipboard.readText();
 		copied = copied.replace(/\n/gi, "↵");
 		const item = new Clipboard(copied, TreeItemCollapsibleState.None);
-		item.command = {
-			command: "clipboard.selected",
-			title: "Selected Item",
-			arguments: [item]
-		};
 
 		if (clipboardList.find(c => c.label === copied)) {
 			clipboardList = clipboardList.filter(c => c.label !== copied);
@@ -24,9 +18,6 @@ export async function activate(context: ExtensionContext) {
 	function createTreeView() {
 		vscode.window.createTreeView('clipboard.history', {
 			treeDataProvider: new ClipboardProvider()
-		});
-		vscode.window.createTreeView('clipboard.selected', {
-			treeDataProvider: new CopiedProvider()
 		});
 	}
 
@@ -73,12 +64,6 @@ export async function activate(context: ExtensionContext) {
 		});
 	});
 
-	commands.registerCommand("clipboard.selected", (item: TreeItem) => {
-		item.label = (item.label as string).replace(/\n/gi, "↵");
-		selectedItem = item;
-		createTreeView();
-	});
-
 	vscode.commands.registerCommand('clipboard.history.copy', (item: TreeItem) => {
 		const label = (item.label as string).replace(/↵/gi, "\n");
 		vscode.env.clipboard.writeText(label).then(() => {
@@ -106,18 +91,6 @@ export class ClipboardProvider implements vscode.TreeDataProvider<Clipboard> {
 	getChildren(element?: Clipboard): Thenable<Clipboard[]> {
 		const temp = Object.assign([], clipboardList);
 		return Promise.resolve(temp.reverse());
-	}
-}
-
-export class CopiedProvider implements vscode.TreeDataProvider<TreeItem> {
-	constructor() { }
-
-	getTreeItem(element: TreeItem): TreeItem {
-		return element;
-	}
-
-	getChildren(element?: TreeItem): Thenable<TreeItem[]> {
-		return Promise.resolve([selectedItem]);
 	}
 }
 

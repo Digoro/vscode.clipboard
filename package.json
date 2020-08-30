@@ -52,10 +52,6 @@
 				{
 					"id": "clipboard.history",
 					"name": "Clipboard History"
-				},
-				{
-					"id": "clipboard.selected",
-					"name": "Selected"
 				}
 			]
 		},
