@@ -1,13 +1,34 @@
 {
+	"publisher": "Digoro",
 	"name": "clipboard",
-	"displayName": "clipboard",
-	"description": "clipboard like intellij",
+	"displayName": "Clipboard",
+	"description": "Simply clipboard like jetbrain",
+	"icon": "resources/clipboard-brand.png",
 	"version": "1.0.0",
+	"extensionKind": [
+		"ui"
+	],
 	"engines": {
 		"vscode": "^1.48.0"
 	},
+	"bugs": {
+		"url": "https://github.com/Digoro/vscode.clipboard/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Digoro/vscode.clipboard.git"
+	},
+	"homepage": "https://github.com/Digoro/vscode.clipboard",
 	"categories": [
 		"Other"
+	],
+	"keywords": [
+		"clipboard",
+		"copy",
+		"cut",
+		"paste",
+		"history",
+		"digoro"
 	],
 	"activationEvents": [
 		"onCommand:clipboard.copy",
@@ -22,7 +43,7 @@
 				{
 					"id": "clipboard-history",
 					"title": "Clipboard History",
-					"icon": "resources/clipboard-outline.png"
+					"icon": "resources/clipboard-icon.png"
 				}
 			]
 		},
@@ -34,7 +55,7 @@
 				},
 				{
 					"id": "clipboard.selected",
-					"name": "Clipboard Selected"
+					"name": "Selected"
 				}
 			]
 		},

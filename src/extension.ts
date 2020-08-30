@@ -51,6 +51,26 @@ export async function activate(context: ExtensionContext) {
 	commands.registerCommand('clipboard.pasteFromClipboard', () => {
 		window.setStatusBarMessage('pasteFromClipboard!');
 		createTreeView();
+
+		const items = clipboardList.map(c => {
+			return {
+				label: c.label,
+				description: c.label
+			};
+		}).reverse();
+
+		window.showQuickPick(items).then(item => {
+			const label = (item as vscode.QuickPickItem).label;
+			vscode.env.clipboard.writeText(label).then(() => {
+				window.setStatusBarMessage("copied in history!");
+				if (!!window.activeTextEditor) {
+					const editor = window.activeTextEditor;
+					editor.edit((textInserter => textInserter.delete(editor.selection))).then(() => {
+						editor.edit((textInserter => textInserter.insert(editor.selection.start, label)));
+					});
+				}
+			});
+		});
 	});
 
 	commands.registerCommand("clipboard.selected", (item: TreeItem) => {
