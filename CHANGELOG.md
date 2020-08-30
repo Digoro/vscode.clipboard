@@ -1,9 +1,10 @@
-# Change Log
+## 1.1.0(2020-08-30)
+### Added
+* **quick pick:** add clipboard history quick pick(`shift + ctrl + v` or `shit + command + v`)
+### Fixed
+* **selected view:** removed selected view
 
-All notable changes to the "clipboard" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+## 1.0.0(2020-08-28)
+### Added
+* **clipboard history:** add clipboard history view
+* **copy clipboard:** copy from clipboard history

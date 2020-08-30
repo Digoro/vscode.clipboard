@@ -51,7 +51,7 @@ export async function activate(context: ExtensionContext) {
 		}).reverse();
 
 		window.showQuickPick(items).then(item => {
-			const label = (item as vscode.QuickPickItem).label;
+			const label = ((item as vscode.QuickPickItem).label as string).replace(/↵/gi, "\n");
 			vscode.env.clipboard.writeText(label).then(() => {
 				window.setStatusBarMessage("copied in history!");
 				if (!!window.activeTextEditor) {
