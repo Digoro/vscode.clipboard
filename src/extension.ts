@@ -4,6 +4,8 @@ import { commands, ExtensionContext, TreeItem, TreeItemCollapsibleState, window 
 var clipboardList: Clipboard[] = [];
 
 export async function activate(context: ExtensionContext) {
+	const config = vscode.workspace.getConfiguration("clipboard");
+
 	async function addClipboardItem() {
 		let copied = await vscode.env.clipboard.readText();
 		copied = copied.replace(/\n/gi, "↵");
@@ -12,7 +14,12 @@ export async function activate(context: ExtensionContext) {
 		if (clipboardList.find(c => c.label === copied)) {
 			clipboardList = clipboardList.filter(c => c.label !== copied);
 		}
+		const maximumClips = config.get('maximumClips', 200);
+
 		clipboardList.push(item);
+		if (clipboardList.length > maximumClips) {
+			clipboardList.shift()
+		}
 	}
 
 	function createTreeView() {

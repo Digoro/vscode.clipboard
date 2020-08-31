@@ -27,3 +27,11 @@ There are two ways to paste.
 2. select you want copy.
 
 ![Alt Text](resources/quickPick.gif)
+
+## Extension Setting
+```
+{
+    // Maximum number of clips to save (default: 200)  
+    clipboard.maximumClips: 200
+}
+```
