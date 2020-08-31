@@ -46,7 +46,7 @@ export async function activate(context: ExtensionContext) {
 		const items = clipboardList.map(c => {
 			return {
 				label: c.label,
-				description: c.label
+				description: ''
 			};
 		}).reverse();
 
