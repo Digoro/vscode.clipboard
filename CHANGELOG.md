@@ -1,3 +1,7 @@
+## 1.3.3(2020-09-01)
+### Added
+* **configuration change event handler:** when setting changed, it detect and apply immediately without refresh.
+
 ## 1.2.3(2020-08-31)
 ### Added
 * **setting:** add setting configuration. (`clipboard.maximumClips`)

@@ -4,7 +4,7 @@
 	"displayName": "Clipboard",
 	"description": "Simply clipboard like jetbrain",
 	"icon": "resources/clipboard-brand.png",
-	"version": "1.2.3",
+	"version": "1.3.3",
 	"extensionKind": [
 		"ui"
 	],

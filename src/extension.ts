@@ -5,6 +5,15 @@ var clipboardList: Clipboard[] = [];
 
 export async function activate(context: ExtensionContext) {
 	const config = vscode.workspace.getConfiguration("clipboard");
+	let maximumClips = config.get('maximumClips', 200);
+
+	vscode.workspace.onDidChangeConfiguration(event => {
+		let affected = event.affectsConfiguration("clipboard.maximumClips");
+		if (affected) {
+			const config = vscode.workspace.getConfiguration("clipboard");
+			maximumClips = config.get('maximumClips', 200);
+		}
+	})
 
 	async function addClipboardItem() {
 		let copied = await vscode.env.clipboard.readText();
@@ -14,11 +23,10 @@ export async function activate(context: ExtensionContext) {
 		if (clipboardList.find(c => c.label === copied)) {
 			clipboardList = clipboardList.filter(c => c.label !== copied);
 		}
-		const maximumClips = config.get('maximumClips', 200);
 
 		clipboardList.push(item);
-		if (clipboardList.length > maximumClips) {
-			clipboardList.shift()
+		if (maximumClips > 0) {
+			clipboardList = clipboardList.reverse().slice(0, maximumClips).reverse();
 		}
 	}
 
