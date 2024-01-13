@@ -26,6 +26,26 @@ There are two ways to paste.
 1. open QuickPick with `shift + ctrl + v` or `shift + command + v`
 2. select you want copy.
 
+##### Paste and move to first
+* **window, linux:** `enter`
+* **mac:** `enter`
+
+##### Paste only
+* **window, linux:** `shift + insert`
+* **mac:** `shift + insert`
+
+##### Copy
+* **window, linux:** `ctrl + insert` or `ctrl + c`
+* **mac:** `cmd + insert` or `cmd + c`
+
+##### Cut
+* **window, linux:** `ctrl + x`
+* **mac:** `cmd + x`
+
+##### Delete
+* **window, linux:** `ctrl + delete` or `ctrl + d`
+* **mac:** `cmd + delete` or `cmd + d`
+
 ![Alt Text](resources/quickPick.gif)
 
 ## Extension Setting
